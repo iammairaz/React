@@ -7,7 +7,7 @@ const signup = async (reqObj) => {
 
     const isUserExists = await loginSchema.findOne({ name: name, mobileNo: mobileNo });
     if (isUserExists) {
-        throw new Error(400, "User already Exists");
+        throw new Error("User already Exists");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -28,12 +28,12 @@ const login = async(reqObj) => {
     const {name,password} = reqObj;
     const user = await loginSchema.findOne({name});
     if(!user) {
-        throw new Error(404, "User not Found");
+        throw new Error("User not Found");
     }
 
     const isPassword = await bcrypt.compare(password,user.password);
     if(!isPassword) {
-        throw new Error(401, "Invalid Password");
+        throw new Error("Invalid Password");
     }
 
     const token = jwt.sign({userName:name},"Veeru",{expiresIn:"1h"});

@@ -11,7 +11,7 @@ const signUp = async(req,res,next) => {
         }
     } catch (error) {
         console.log(error.message);
-        res.status(500).send("Server Error")
+        res.status(500).send(error.message)
     }
 }
 const login = async(req,res,next) => {
@@ -25,7 +25,7 @@ const login = async(req,res,next) => {
         }
     } catch (error) {
         console.log(error.message);
-        res.status(500).send("Server Error")
+        res.status(400).send(error.message)
     }
 }
 
